@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -13,8 +14,8 @@ export default class CreateExercise extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: "",
-      description: "",
+      username: " ",
+      description: " ",
       duration: 0,
       date: new Date(),
       users: [],
@@ -23,10 +24,19 @@ export default class CreateExercise extends Component {
 
   // This will run the code as soon as the page is loaded, even before anything is displayed/rendered
   componentDidMount() {
-    this.setState({
-      users: ["test user"],
-      username: "test user",
-    });
+    axios
+      .get("http://localhost:5000/users/")
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.setState({
+            users: response.data.map((user) => user.username),
+            username: response.data[0].username,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   onChangeUsername(e) {
@@ -62,7 +72,12 @@ export default class CreateExercise extends Component {
       duration: this.state.duration,
       date: this.state.date,
     };
+
     console.log(exercise);
+
+    axios
+      .post("http://localhost:5000/exercises/add", exercise)
+      .then((res) => console.log(res.data));
 
     window.location = "/";
   }

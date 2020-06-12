@@ -24,11 +24,11 @@ connection.once("open", () => {
 });
 
 // Must require the route files and use them. This is our routes like in Rails.
-const usersRouter = require("./routes/users");
 const exercisesRouter = require("./routes/exercises");
+const usersRouter = require("./routes/users");
 // Just like in Rails. /Users will go to the users route
-app.use("/users", usersRouter);
 app.use("/exercises", exercisesRouter);
+app.use("/users", usersRouter);
 
 // This starts the server and listens to a set port
 app.listen(port, () => {

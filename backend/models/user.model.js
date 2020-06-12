@@ -11,7 +11,6 @@ const userSchema = new Schema(
       unique: true,
       //   This will trim white space off
       trim: true,
-
       //   Username must be at least 3 characters long
       minlength: 3,
     },
