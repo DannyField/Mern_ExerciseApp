@@ -7,7 +7,7 @@ let User = require("../models/user.model");
 router.route("/").get((req, res) => {
   //   The find() will look for all the users in the mongoose database and returns a promise
   User.find()
-    .then((user) => res.json(users))
+    .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 

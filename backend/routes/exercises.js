@@ -1,11 +1,11 @@
 const router = require("express").Router();
 // Bringing in the mongoose exercise model
-let User = require("../models/exercise.model");
+let Exercise = require("../models/exercise.model");
 
 // Our first endpoint, that gets GET requests, handles HTML get requests
 router.route("/").get((req, res) => {
-  //   The find() will look for all the users in the mongoose database and returns a promise
   Exercise.find()
+    //   The find() will look for all the users in the mongoose database and returns a promise
     .then((exercises) => res.json(exercises))
     .catch((err) => res.status(400).json("Error: " + err));
 });
